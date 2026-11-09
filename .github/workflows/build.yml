@@ -14,6 +14,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Unpack project zip (if the zip was uploaded as-is)
+        run: |
+          if [ ! -f package.json ] && [ -f 4C-apk-project.zip ]; then
+            unzip -o 4C-apk-project.zip -x '.github/*'
+          fi
+          ls
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
